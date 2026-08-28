@@ -42,6 +42,16 @@ function displayBooks() {
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", function () {
+      const bookId = bookCard.dataset.id;
+      const bookIndex = myLibrary.findIndex(function (book) {
+        return book.id === bookId;
+      });
+
+      myLibrary.splice(bookIndex, 1);
+
+      displayBooks();
+    });
 
     const toggleButton = document.createElement("button");
     toggleButton.textContent = "Toggle Read";
@@ -57,5 +67,4 @@ function displayBooks() {
   });
 }
 
-displayBooks();
 displayBooks();
