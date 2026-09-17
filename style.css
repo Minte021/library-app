@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  color: #0b5025;
+  font-size: 2em;
+}
+
+#new-book-btn {
+  background-color: #0b5025;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#new-book-btn:hover {
+  background-color: #0a3e1c;
+}
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label, input, button {
+  margin: 5px 0;
+}
