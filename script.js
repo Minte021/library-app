@@ -67,8 +67,6 @@ function displayBooks() {
   });
 }
 
-displayBooks();
-
 const newBookButton = document.querySelector("#new-book-btn");
 const bookDialog = document.querySelector("#book-dialog");
 const bookForm = document.querySelector("#book-form");
@@ -79,5 +77,18 @@ newBookButton.addEventListener("click", function () {
 });
 
 cancelButton.addEventListener("click", function () {
+  bookDialog.close();
+});
+
+bookForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = Number(document.querySelector("#pages").value);
+  const read = document.querySelector("#read").checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+  bookForm.reset();
   bookDialog.close();
 });
