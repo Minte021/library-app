@@ -74,6 +74,10 @@ const bookDialog = document.querySelector("#book-dialog");
 const bookForm = document.querySelector("#book-form");
 const cancelButton = document.querySelector("#cancel-btn");
 
-newBookButton.addEventListener("click", function() {
+newBookButton.addEventListener("click", function () {
   bookDialog.showModal();
-})
+});
+
+cancelButton.addEventListener("click", function () {
+  bookDialog.close();
+});
