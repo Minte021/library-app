@@ -8,10 +8,10 @@ class Book {
   this.pages = pages;
   this.read = read;
 }
-}
-Book.prototype.toggleRead = function () {
+toggleRead() {
   this.read = !this.read;
-};
+}
+}
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
