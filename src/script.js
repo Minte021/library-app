@@ -1,28 +1,18 @@
-const myLibrary = [];
+import { Library } from "./library.js";
 
-class Book {
-  constructor(title, author, pages, read) {
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-toggleRead() {
-  this.read = !this.read;
-}
-}
+const library = new Library();
 
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-}
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
 
-addBookToLibrary("Clean Code", "Robert C. Martin", 464, true);
-addBookToLibrary("Good Morning Holy Spirit", "Pastor Benny Hinn", 90, true);
-console.log(myLibrary);
+library.addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+
+library.addBookToLibrary("Clean Code", "Robert C. Martin", 464, true);
+library.addBookToLibrary("Good Morning Holy Spirit", "Pastor Benny Hinn", 90, true);
+console.log(library.books);
+
+
+
+
 
 const libraryContainer = document.querySelector("#library-container");
 
@@ -105,3 +95,4 @@ bookForm.addEventListener("submit", function (event) {
   bookForm.reset();
   bookDialog.close();
 });
+
