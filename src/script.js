@@ -10,15 +10,12 @@ library.addBookToLibrary("Clean Code", "Robert C. Martin", 464, true);
 library.addBookToLibrary("Good Morning Holy Spirit", "Pastor Benny Hinn", 90, true);
 console.log(library.books);
 
-
-
-
-
 const libraryContainer = document.querySelector("#library-container");
 
 function displayBooks() {
   libraryContainer.innerHTML = "";
-  myLibrary.forEach((book) => {
+
+  library.books.forEach((book) => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
     bookCard.dataset.id = book.id;
@@ -38,24 +35,14 @@ function displayBooks() {
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", function () {
-      const bookId = bookCard.dataset.id;
-      const bookIndex = myLibrary.findIndex(function (book) {
-        return book.id === bookId;
-      });
-
-      myLibrary.splice(bookIndex, 1);
-
+      library.removeBook(book);
       displayBooks();
     });
 
     const toggleButton = document.createElement("button");
     toggleButton.textContent = "Toggle Read";
     toggleButton.addEventListener("click", function () {
-      const bookId = bookCard.dataset.id;
-      const selectedBook = myLibrary.find(function (book) {
-        return book.id === bookId;
-      });
-      selectedBook.toggleRead();
+      book.toggleRead();
       displayBooks();
     });
 
@@ -90,9 +77,10 @@ bookForm.addEventListener("submit", function (event) {
   const pages = Number(document.querySelector("#pages").value);
   const read = document.querySelector("#read").checked;
 
-  addBookToLibrary(title, author, pages, read);
+  library.addBookToLibrary(title, author, pages, read);
   displayBooks();
   bookForm.reset();
   bookDialog.close();
 });
 
+displayBooks();
