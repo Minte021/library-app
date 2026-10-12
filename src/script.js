@@ -1,4 +1,5 @@
 import { Library } from "./library.js";
+import { displayBooks } from "./UI.js";
 
 const library = new Library();
 
@@ -10,52 +11,6 @@ library.addBookToLibrary("Clean Code", "Robert C. Martin", 464, true);
 library.addBookToLibrary("Good Morning Holy Spirit", "Pastor Benny Hinn", 90, true);
 console.log(library.books);
 
-const libraryContainer = document.querySelector("#library-container");
-
-function displayBooks() {
-  libraryContainer.innerHTML = "";
-
-  library.books.forEach((book) => {
-    const bookCard = document.createElement("div");
-    bookCard.classList.add("book-card");
-    bookCard.dataset.id = book.id;
-
-    const title = document.createElement("h2");
-    title.textContent = book.title;
-
-    const author = document.createElement("p");
-    author.textContent = `Author: ${book.author}`;
-
-    const pages = document.createElement("p");
-    pages.textContent = `Pages: ${book.pages}`;
-
-    const status = document.createElement("p");
-    status.textContent = book.read ? "Status: Read" : "Status: Not Read";
-
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.addEventListener("click", function () {
-      library.removeBook(book);
-      displayBooks();
-    });
-
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = "Toggle Read";
-    toggleButton.addEventListener("click", function () {
-      book.toggleRead();
-      displayBooks();
-    });
-
-    bookCard.appendChild(title);
-    bookCard.appendChild(author);
-    bookCard.appendChild(pages);
-    bookCard.appendChild(status);
-    bookCard.appendChild(toggleButton);
-    bookCard.appendChild(removeButton);
-
-    libraryContainer.appendChild(bookCard);
-  });
-}
 
 const newBookButton = document.querySelector("#new-book-btn");
 const bookDialog = document.querySelector("#book-dialog");
@@ -78,9 +33,9 @@ bookForm.addEventListener("submit", function (event) {
   const read = document.querySelector("#read").checked;
 
   library.addBookToLibrary(title, author, pages, read);
-  displayBooks();
+  displayBooks(library);
   bookForm.reset();
   bookDialog.close();
 });
 
-displayBooks();
+displayBooks(library);
