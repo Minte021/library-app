@@ -25,17 +25,40 @@ cancelButton.addEventListener("click", function () {
   bookDialog.close();
 });
 
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+const readInput = document.querySelector("#read");
+
+const titleError = document.querySelector("#title-error");
+function validateTitle() {
+  if (titleInput.value.trim() === "") {
+    titleError.textContent = "Title cannot be empty.";
+  } else {
+    titleInput.setCustomValidity("");
+    titleError.textContent = "";
+  }
+}
+
+titleInput.addEventListener("input", validateTitle);
+
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const pages = Number(document.querySelector("#pages").value);
-  const read = document.querySelector("#read").checked;
+
+  validateTitle();
+  
+  if (!bookForm.reportValidity()) {
+    return;
+  }
+
+  const title = titleInput.value.trim();
+  const author = authorInput.value.trim();
+  const pages = Number(pagesInput.value);
+  const read = readInput.checked;
 
   library.addBookToLibrary(title, author, pages, read);
+
   displayBooks(library);
   bookForm.reset();
   bookDialog.close();
 });
-
-displayBooks(library);
