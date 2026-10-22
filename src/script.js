@@ -40,12 +40,24 @@ function validateTitle() {
   }
 }
 
+const pageError = document.querySelector("#pages-error");
+function validatePage() {
+  if(pagesInput.value < 0) {
+    pageError.textContent = "Page canot be negative.";
+  } else {
+    pagesInput.setCustomValidity("");
+    pageError.textContent = "";
+  }
+}
 titleInput.addEventListener("input", validateTitle);
+pagesInput.addEventListener("input", validatePage);
 
 bookForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  
 
   validateTitle();
+  validatePage();
   
   if (!bookForm.reportValidity()) {
     return;
